@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoE Post-Hoc Dashboard (120BT)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1><span class="brand">MoE Post-Hoc Sweep</span><span class="brand-sep">·</span><span class="brand-stage">120BT</span></h1>
+  <nav class="tab-bar" id="tab-bar" role="tablist"></nav>
+  <div class="selectors">
+    <label>Batch Size <select id="sel-bsz"></select></label>
+    <label>Number of Experts <select id="sel-nexp"></select></label>
+    <label>Learning Rate <select id="sel-lr"></select></label>
+    <span id="bucket-status" class="status"></span>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-icon theme-icon-light">☀</span>
+      <span class="theme-icon theme-icon-dark">☾</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section id="sec-saturation" class="panel">
+    <h2><span class="sec-icon">◎</span>Router Saturation</h2>
+    <div id="saturation-content"></div>
+  </section>
+
+  <section id="sec-activation" class="panel">
+    <h2><span class="sec-icon">∿</span>Expert Activation Norms</h2>
+    <div class="agg-row" id="activation-agg"></div>
+    <div class="sub">
+      <h3>Per-layer</h3>
+      <div class="layer-tabs" id="activation-tabs"></div>
+      <div id="activation-detail" class="detail"></div>
+      <details>
+        <summary>Browse all layers (scroll)</summary>
+        <div class="hscroll" id="activation-scroll"></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="sec-coactivation" class="panel">
+    <h2><span class="sec-icon">▦</span>Coactivation Matrices</h2>
+    <div class="sub">
+      <h3>Selected layer</h3>
+      <div class="layer-tabs" id="coact-tabs"></div>
+      <div id="coact-detail" class="detail"></div>
+      <details>
+        <summary>Browse all layers (scroll)</summary>
+        <div class="hscroll" id="coact-scroll"></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="sec-routing" class="panel">
+    <h2><span class="sec-icon">⥃</span>Expert Routing <span class="h2-sub">(per-layer, frame-stepped)</span></h2>
+    <p class="hint">Compare up to 3 layers side-by-side. Use Play/Pause, ◀/▶, or the slider to step through training checkpoints.</p>
+    <div class="gif-compare" id="gif-compare"></div>
+    <details>
+      <summary>Aggregate routing GIF (first/mid/last)</summary>
+      <div id="gif-agg"></div>
+    </details>
+  </section>
+
+  <section id="sec-raw" class="panel">
+    <h2><span class="sec-icon">{}</span>Raw JSON</h2>
+    <ul id="raw-links"></ul>
+  </section>
+
+  <footer class="footer">
+    <span>MoE Post-Hoc Dashboard</span>
+    <span class="footer-sep">·</span>
+    <span id="footer-stats"></span>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
