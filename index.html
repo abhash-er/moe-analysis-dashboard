@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoE Post-Hoc Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand-block">
+    <div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="brand-text">
+      <span class="brand-title">MoE Post-Hoc</span>
+      <span class="brand-stage" id="brand-stage">120BT</span>
+    </div>
+  </div>
+
+  <nav class="tab-bar" id="tab-bar" role="tablist" aria-label="Result sets"></nav>
+
+  <div class="side-group sweep-selectors" id="sweep-selectors">
+    <span class="side-group-title">Bucket</span>
+    <label>Batch size <select id="sel-bsz"></select></label>
+    <label>Experts <select id="sel-nexp"></select></label>
+    <label>Learning rate <select id="sel-lr"></select></label>
+  </div>
+  <div class="side-group runs-selector" id="runs-selector" style="display:none">
+    <span class="side-group-title">Run</span>
+    <label>Run <select id="sel-run"></select></label>
+  </div>
+
+  <nav class="section-nav" id="section-nav" aria-label="Sections">
+    <span class="side-group-title">Sections</span>
+    <a href="#sec-saturation"><span class="nav-idx">1</span>Router saturation</a>
+    <a href="#sec-activation"><span class="nav-idx">2</span>Activation norms</a>
+    <a href="#sec-coactivation"><span class="nav-idx">3</span>Coactivation</a>
+    <a href="#sec-routing"><span class="nav-idx">4</span>Expert routing</a>
+    <a href="#sec-raw"><span class="nav-idx">5</span>Raw JSON</a>
+  </nav>
+
+  <div class="side-footer">
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode (T)">
+      <span class="theme-icon theme-icon-light">☀</span>
+      <span class="theme-icon theme-icon-dark">☾</span>
+      <span class="theme-label">Theme</span>
+    </button>
+    <div id="footer-stats" class="side-stats"></div>
+    <div class="kbd-hints">
+      <span><kbd>1</kbd>–<kbd>5</kbd> sections</span>
+      <span><kbd>←</kbd><kbd>→</kbd> frames</span>
+      <span><kbd>Space</kbd> play</span>
+      <span><kbd>T</kbd> theme</span>
+    </div>
+  </div>
+</aside>
+
+<main>
+  <div class="context-bar">
+    <span id="bucket-status" class="status"></span>
+  </div>
+
+  <section id="sec-saturation" class="panel">
+    <h2><span class="sec-idx">01</span>Router Saturation</h2>
+    <div id="saturation-content"></div>
+  </section>
+
+  <section id="sec-activation" class="panel">
+    <h2><span class="sec-idx">02</span>Expert Activation Norms</h2>
+    <div class="agg-row" id="activation-agg"></div>
+    <div class="sub">
+      <h3>Per-layer</h3>
+      <div class="layer-tabs" id="activation-tabs"></div>
+      <div id="activation-detail" class="detail"></div>
+      <details>
+        <summary>Browse all layers (scroll)</summary>
+        <div class="hscroll" id="activation-scroll"></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="sec-coactivation" class="panel">
+    <h2><span class="sec-idx">03</span>Coactivation Matrices</h2>
+    <div class="sub">
+      <h3>Selected layer</h3>
+      <div class="layer-tabs" id="coact-tabs"></div>
+      <div id="coact-detail" class="detail"></div>
+      <details>
+        <summary>Browse all layers (scroll)</summary>
+        <div class="hscroll" id="coact-scroll"></div>
+      </details>
+    </div>
+  </section>
+
+  <section id="sec-routing" class="panel">
+    <h2><span class="sec-idx">04</span>Expert Routing <span class="h2-sub">per-layer, frame-stepped</span></h2>
+    <p class="hint">Compare up to 3 layers side-by-side. Use Play/Pause, ◀/▶, the slider, or ←/→ to step through training checkpoints.</p>
+    <div class="gif-compare" id="gif-compare"></div>
+    <details>
+      <summary>Aggregate routing GIF (first/mid/last)</summary>
+      <div id="gif-agg"></div>
+    </details>
+  </section>
+
+  <section id="sec-raw" class="panel">
+    <h2><span class="sec-idx">05</span>Raw JSON</h2>
+    <ul id="raw-links"></ul>
+  </section>
+</main>
+
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <figure>
+    <img id="lightbox-img" alt="">
+    <figcaption id="lightbox-cap"></figcaption>
+  </figure>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
