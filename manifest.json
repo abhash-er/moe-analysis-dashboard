@@ -5116,7 +5116,7 @@
       "runs": [
         {
           "id": "0_4B_nexp32_stable120BT",
-          "label": "0.4B \u00b7 nexp32 \u00b7 stable120BT",
+          "label": "0.4B \u00b7 nexp32 \u00b7 lr0.001 \u00b7 gbsz128 \u00b7 stable120BT",
           "date": "2026-07-14",
           "mtime": 1784040727.0,
           "path_prefix": "moe_analysis_ml_stitched/0.4B_nexp32_stable120BT",
@@ -5223,7 +5223,7 @@
         },
         {
           "id": "0_9B_nexp64_stitched_120BT",
-          "label": "0.9B \u00b7 nexp64 \u00b7 stitched\u2192120BT",
+          "label": "0.9B \u00b7 nexp64 \u00b7 lr0.002 \u00b7 gbsz512 \u00b7 stitched\u2192120BT",
           "date": "2026-07-14",
           "mtime": 1784061080.0,
           "path_prefix": "moe_analysis_ml_stitched/0.9B_nexp64_stitched_120BT",
